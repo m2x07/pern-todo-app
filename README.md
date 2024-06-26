@@ -6,7 +6,7 @@ Follow these steps to get the project running. \
 **Make sure PostgreSQL is installed on your machine.**
 
 ```bash
-git clone https://github.com/m2x07/todoapp
+git clone https://github.com/m2x07/pern-todo-app
 ```
 
 ### Prepare the files:
