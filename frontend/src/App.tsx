@@ -101,7 +101,7 @@ function App() {
                         }, 100);
                     }}>
                     <DrawerTrigger>
-                        <Button variant="default">Add new todo</Button>
+                        <Button variant="default" className="text-base">Add new todo</Button>
                     </DrawerTrigger>
                     <DrawerContent>
                         <div className="mx-auto w-full max-w-md">
@@ -117,6 +117,7 @@ function App() {
                                         setNewTodo(e.target.value);
                                     }}
                                     placeholder="Eat a pizza"
+                                    maxLength={32}
                                 />
                             </div>
 
@@ -143,7 +144,7 @@ function App() {
                     </DrawerContent>
                 </Drawer>
             </div>
-            <div className="container max-w-4xl rounded-xl border">
+            <div className="container max-w-4xl rounded-xl border py-4">
                 <TodoTable all_todos={all_todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
             </div>
         </>

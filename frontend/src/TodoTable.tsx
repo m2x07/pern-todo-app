@@ -17,7 +17,6 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer";
-
 import { Button } from "./components/ui/button";
 import { TodoItem, TodoTableProps } from "./types";
 import { Checkbox } from "./components/ui/checkbox";
@@ -30,8 +29,8 @@ const placeholders = [
     "Pay electricity bill",
     "Hit the gym",
     "Refill laila's feeder",
-    "Finish assignment"
-]
+    "Finish assignment",
+];
 
 export default function TodoTable({ all_todos, updateTodo, deleteTodo }: TodoTableProps) {
     function handleCheckboxChange(todo: TodoItem) {
@@ -54,34 +53,37 @@ export default function TodoTable({ all_todos, updateTodo, deleteTodo }: TodoTab
 
     return (
         <>
-            <Table>
-                <TableCaption className="mb-7">Postgres, Express, React, Node</TableCaption>
+            <Table className="box-border text-base">
+                <TableCaption className="">Postgres, Express, React, Node</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="max-w-8 text-center">Id</TableHead>
-                        <TableHead className="max-w-8 text-center">Status</TableHead>
-                        <TableHead>Todo</TableHead>
-                        <TableHead className="max-w-4 text-center">Edit</TableHead>
+                        <TableHead className="w-20 text-center">Id</TableHead>
+                        <TableHead className="w-20 text-center">Status</TableHead>
+                        <TableHead className="text-center" colSpan={2}>
+                            Todo
+                        </TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {all_todos.map((todo) => (
-                        <TableRow key={todo.id} className="hover:bg-background">
-                            <TableCell className="max-w-8 text-center font-medium">
-                                {todo.id}
-                            </TableCell>
-                            <TableCell className="max-w-8">
-                                {todo.done ? (
-                                    <Checkbox
-                                        onCheckedChange={() => handleCheckboxChange(todo)}
-                                        checked
-                                    />
-                                ) : (
-                                    <Checkbox onCheckedChange={() => handleCheckboxChange(todo)} />
-                                )}
+                    {all_todos.map((todo, index) => (
+                        <TableRow key={index} className="hover:bg-background">
+                            <TableCell className="text-center font-medium">{index + 1}</TableCell>
+                            <TableCell className="">
+                                <div className="m-auto w-fit">
+                                    {todo.done ? (
+                                        <Checkbox
+                                            onCheckedChange={() => handleCheckboxChange(todo)}
+                                            checked
+                                        />
+                                    ) : (
+                                        <Checkbox
+                                            onCheckedChange={() => handleCheckboxChange(todo)}
+                                        />
+                                    )}
+                                </div>
                             </TableCell>
                             <TableCell>{todo.data}</TableCell>
-                            <TableCell className="max-w-4 py-0 text-right">
+                            <TableCell className="py-0 text-right">
                                 <Drawer
                                     onOpenChange={(isOpen) => {
                                         if (isOpen) {
@@ -94,7 +96,7 @@ export default function TodoTable({ all_todos, updateTodo, deleteTodo }: TodoTab
                                         }, 100);
                                     }}>
                                     <DrawerTrigger>
-                                        <Button variant="link" className="max-w-4 text-center">
+                                        <Button variant="link" className="text-center">
                                             Edit
                                         </Button>
                                     </DrawerTrigger>
@@ -113,7 +115,7 @@ export default function TodoTable({ all_todos, updateTodo, deleteTodo }: TodoTab
                                                         handleTodoDataChange({
                                                             ...todo,
                                                             data: tempText,
-                                                        })
+                                                        });
                                                         // alert(tempText)
                                                     }}
                                                     className="flex flex-col gap-1"
@@ -127,7 +129,9 @@ export default function TodoTable({ all_todos, updateTodo, deleteTodo }: TodoTab
                                                     <Input
                                                         name="updatedTodo"
                                                         type="text"
-                                                        placeholder={placeholders[getRandomNum(0, 4)]}
+                                                        placeholder={
+                                                            placeholders[getRandomNum(0, 4)]
+                                                        }
                                                         value={tempText}
                                                         maxLength={32}
                                                         onChange={(e) => {
@@ -149,7 +153,9 @@ export default function TodoTable({ all_todos, updateTodo, deleteTodo }: TodoTab
                                                             <Button
                                                                 variant="destructive"
                                                                 type="button"
-                                                                onClick={() => handleTodoDelete(todo.id)}
+                                                                onClick={() =>
+                                                                    handleTodoDelete(todo.id)
+                                                                }
                                                                 className="w-full bg-red-600 hover:bg-red-700">
                                                                 Delete
                                                             </Button>
@@ -170,7 +176,7 @@ export default function TodoTable({ all_todos, updateTodo, deleteTodo }: TodoTab
                     ))}
                 </TableBody>
             </Table>
-            {/* <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Ok</h1> */}
         </>
     );
 }
+
